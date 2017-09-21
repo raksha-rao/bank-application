@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "number": "Unique number for an account",
+  "name": "name of the account holder",
+  "currency": "currency of the account",
+  "balance": "Balance available in the account"
+}

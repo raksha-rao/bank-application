@@ -1,0 +1,46 @@
+{"accounts": [
+  {
+    "number": 1003283001,
+    "name" : "Mook Kim Juang",
+    "currency": "USD",
+    "balance":10000.00
+  },
+  {
+    "number": 1003283002,
+    "name" : "Steven Harris",
+    "currency": "EUR",
+    "balance":200.00
+  },
+  {
+    "number": 1003283003,
+    "name" : "Will Smith",
+    "currency": "USD",
+    "balance":13579.20
+  },
+  {
+    "number": 1003283004,
+    "name" : "Jaden Smith",
+    "currency": "JPY",
+    "balance":2500.34
+  },
+
+  {
+    "number": 1003283005,
+    "name" : "Rebecca Mane",
+    "currency": "USD",
+    "balance":65000.05
+  },
+  {
+    "number": 1003283006,
+    "name" : "Angelina Jolie",
+    "currency": "USD",
+    "balance":12000.80
+  },
+  {
+    "number": 1003283007,
+    "name" : "Elizabeth Taylor",
+    "currency": "USD",
+    "balance":7800.68
+  }
+]
+}
