@@ -3,17 +3,22 @@ package com.account.controller;
 import com.account.model.Account;
 import com.account.request.AccountRequest;
 import com.account.request.PatchRequest;
-import com.account.response.AccountResponse;
+import com.account.response.ObjectResponse;
 import com.account.response.BaseResponse;
 import com.account.service.AccountService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.io.IOException;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 @Path("/v1/accounts/account")
@@ -26,15 +31,22 @@ public class AccountController {
     @Value("${json.account_details}")
     private String accountDetailsFile;
 
+    Logger logger = LoggerFactory.getLogger("AccountController");
+
     @GET
     public BaseResponse getAllAccounts() {
         List<Account> accountList;
         BaseResponse response;
         try {
             accountList = accountService.getAccountsFromFile(accountDetailsFile);
-            response = new AccountResponse(200,true, accountList);
-        } catch (IOException e) {
-            response = new AccountResponse(500,false, e.getMessage());
+            // Avoid duplicate accounts
+            Set accountSet = accountList.stream().collect(Collectors.toCollection(LinkedHashSet::new));
+            response = new ObjectResponse(HttpServletResponse.SC_OK,true, accountSet);
+            if( accountList == null || accountList.isEmpty() ){
+                response.setMessage("No accounts found!");
+            }
+        } catch (Exception e) {
+            response = new ObjectResponse(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,false, e.getMessage());
         }
         return response;
     }
@@ -46,9 +58,12 @@ public class AccountController {
         BaseResponse response;
         try {
             Account account = accountService.findAccount(accountId, accountDetailsFile);
-            response = new AccountResponse(200,true, account);
-        } catch (IOException e) {
-            response = new AccountResponse(500,false, e.getMessage());
+            response = new ObjectResponse(HttpServletResponse.SC_OK,true, account);
+            if(account == null){
+                response.setMessage("Account not found!");
+            }
+        } catch (Exception e) {
+            response = new ObjectResponse(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,false, e.getMessage());
         }
 
         return response;
@@ -61,11 +76,11 @@ public class AccountController {
         BaseResponse response;
         try {
             Long accountNumber = accountService.createAccount(accountRequest, accountDetailsFile);
-            response = new AccountResponse(201,true);
+            response = new ObjectResponse(HttpServletResponse.SC_CREATED,true);
             String message = "Account created with account number "+ accountNumber;
             response.setMessage(message);
-        } catch (IOException e) {
-            response = new AccountResponse(500,false, e.getMessage());
+        } catch (Exception e) {
+            response = new ObjectResponse(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,false, e.getMessage());
         }
         return response;
     }
@@ -74,13 +89,14 @@ public class AccountController {
     @PATCH
     @Path("/{accountId}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public BaseResponse patchAccount(List<PatchRequest> patchRequestList, @PathParam("accountId") String accountId) {
+    public BaseResponse patchAccount(List<PatchRequest> patchRequestList) {
         BaseResponse response;
         try {
-            accountService.updateAccount(patchRequestList, accountId, accountDetailsFile);
-            response = new AccountResponse(200,true);
+            accountService.updateAccount(patchRequestList, accountDetailsFile);
+            response = new ObjectResponse(HttpServletResponse.SC_OK,true);
+            response.setMessage("Account updated successfully!");
         } catch (Exception e) {
-            response = new AccountResponse(500,false, e.getMessage());
+            response = new ObjectResponse(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,false, e.getMessage());
         }
 
         return response;
