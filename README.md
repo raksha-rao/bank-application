@@ -12,7 +12,7 @@ mvn spring-boot:run to run the application
 You can use the following API's in Postman
 
 **REST APIs**
-/v1/accounts/account - Create an account, JSON input(POST)
+**/v1/accounts/account - Create an account, JSON input(POST)**
 
 **Sample Input**
 {"name": "Mary Jane","currency": "GBP","depositAmount": 1000}
@@ -23,7 +23,7 @@ Sample Output
     "message": "Account created with account number 547321"
 }
 
-/v1/accounts/account/account_id - Get details of an account(GET)
+**/v1/accounts/account/account_id - Get details of an account(GET)**
 
 **Sample Output**
 {
@@ -37,7 +37,7 @@ Sample Output
     }
 }
 
-/v1/accounts/account/account_id - Update an account(PATCH)
+**/v1/accounts/account/account_id - Update an account(PATCH)**
 
 **Sample Input**
 [{ "op": "replace", "path": "/accounts/1/name", "value": "Steven Wilson" },
@@ -52,7 +52,7 @@ Sample Output
 }
 
 
-/v1/accounts/account - list all the accounts(GET)
+**/v1/accounts/account - list all the accounts(GET)**
 
 **Sample Output**
 {
