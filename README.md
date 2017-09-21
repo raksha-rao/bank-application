@@ -1,4 +1,4 @@
-# bank-application
+# A simple Bank Application
 A simple Bank Application to add, update, search accounts using Spring Boot.
 
 Prerequisites:
