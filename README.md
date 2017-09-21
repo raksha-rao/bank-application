@@ -1,20 +1,20 @@
 # A simple Bank Application
 A simple Bank Application to add, update, search accounts using Spring Boot.
 
-Prerequisites:
+**Prerequisites**:
 Java 1.8
 
-Usage
+**Usage**
 Run the following commands on the terminal
 mvn clean package to package the jar file in /target directory
 mvn spring-boot:run to run the application
 
 You can use the following API's in Postman
 
-REST APIs
+**REST APIs**
 /v1/accounts/account - Create an account, JSON input(POST)
 
-Sample Input 
+**Sample Input**
 {"name": "Mary Jane","currency": "GBP","depositAmount": 1000}
 Sample Output
 {
@@ -25,7 +25,7 @@ Sample Output
 
 /v1/accounts/account/account_id - Get details of an account(GET)
 
-Sample Output
+**Sample Output**
 {
     "status": 200,
     "success": true,
@@ -39,12 +39,12 @@ Sample Output
 
 /v1/accounts/account/account_id - Update an account(PATCH)
 
-Sample Input
+**Sample Input**
 [{ "op": "replace", "path": "/accounts/1/name", "value": "Steven Wilson" },
 { "op": "replace", "path": "/accounts/0/balance", "value": 10200.0 }
 ]
 
-Sample Output
+**Sample Output**
 {
     "status": 200,
     "success": true,
@@ -54,7 +54,7 @@ Sample Output
 
 /v1/accounts/account - list all the accounts(GET)
 
-Sample Output
+**Sample Output**
 {
     "status": 200,
     "success": true,
