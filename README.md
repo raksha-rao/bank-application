@@ -9,6 +9,8 @@ Run the following commands on the terminal
 mvn clean package to package the jar file in /target directory
 mvn spring-boot:run to run the application
 
+accountdetails.json will serve as the input data.
+
 You can use the following API's in Postman
 
 **REST APIs**
