@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="TestAll">
+
+    <test name="testcase1">
+        <parameter name="accountDetailsFile" value="accountdetails.json"/>
+        <parameter name="currency" value="$"/>
+        <classes>
+            <class name="com.account.controller.AccountControllerTest" />
+            <class name="com.account.service.AccountServiceTest" />
+        </classes>
+    </test>
+
+</suite>
