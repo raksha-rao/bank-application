@@ -40,7 +40,7 @@ public class AccountControllerTest {
         Mockito.when(accountService.createAccount(accountRequest,accountDetailsFile)).thenReturn(1L);
 
         BaseResponse response = accountController.createAccount(accountRequest);
-        Assert.assertNull(response.isSuccess());
+        Assert.assertNotNull(response.isSuccess());
         System.out.println(response.getMessage()+response.getStatus()+response.isSuccess());
     }
 
