@@ -74,10 +74,10 @@ public class AccountService {
                 .withBalance(accountRequest.getDepositAmount()).build();
 
         //Throws NPE is any variables of account is null
-        Optional<Account> op = Optional.of(account);
+       /* Optional<Account> op = Optional.of(account);
         if (op.isPresent()) {
             writeToFile(account, fileName);
-        }
+        }*/
         return account.getAccountNumber();
     }
 
