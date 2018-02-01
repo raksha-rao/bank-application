@@ -45,11 +45,12 @@ public class AccountServiceTest {
         accountService.createAccount(accountRequest,accountDetailsFile);
     }
 
-    @Test
+    @Test(dependsOnMethods={"testOpen"})
     @Parameters("accountDetailsFile")
-    public void testUpdateAccount(String accountDetailsFile) throws Exception {
+    public int testUpdateAccount(String accountDetailsFile) throws Exception {
         List<PatchRequest> patchRequestList = new ArrayList<PatchRequest>();
         accountService.updateAccount(patchRequestList,accountDetailsFile);
+        return 1;
     }
 
 }

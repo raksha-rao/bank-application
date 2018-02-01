@@ -1,8 +1,5 @@
 package com.account.request;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
-@JsonInclude
 public class PatchRequest {
     private String op;
     private String path;

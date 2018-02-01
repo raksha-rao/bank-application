@@ -52,7 +52,7 @@ public class AccountService {
     public Account findAccount(String accountId, String fileName) throws IOException {
         File file = new File(fileName);
         JsonNode root = mapper.readTree(file);
-        ArrayNode accounts = (ArrayNode) root.path("accounts");
+        ArrayNode accounts = (ArrayNode) root.path(ACCOUNTS_ROOT_NODE);
         for (JsonNode node : accounts) {
             Account account = mapper.readValue(node.traverse(), Account.class);
             if ((Long.parseLong(accountId)) == (account.getAccountNumber())) {
@@ -89,7 +89,7 @@ public class AccountService {
         File file = new File(fileName);
 
         JsonNode rootNode = mapper.readTree(file);
-        ArrayNode accounts = (ArrayNode) rootNode.path("accounts");
+        ArrayNode accounts = (ArrayNode) rootNode.path(ACCOUNTS_ROOT_NODE);
 
         JsonNode accountNode = mapper.convertValue(account, JsonNode.class);
         accounts.add(accountNode);

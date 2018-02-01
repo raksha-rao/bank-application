@@ -1,8 +1,6 @@
 package com.account.request;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 
-@JsonInclude
 public class AccountRequest {
     private String name;
     private String currency;
