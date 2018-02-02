@@ -25,6 +25,7 @@
                     <forkCount>0</forkCount>
                     <suiteXmlFiles>
                         <suiteXmlFile>testng.xml</suiteXmlFile>
+                        <suiteXmlFile>target/surefire-reports/testng-failed.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
