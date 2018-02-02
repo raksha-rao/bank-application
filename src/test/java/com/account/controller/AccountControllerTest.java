@@ -41,7 +41,6 @@ public class AccountControllerTest {
 
         BaseResponse response = accountController.createAccount(accountRequest);
         Assert.assertNull(response.isSuccess());
-        System.out.println(response.getMessage()+response.getStatus()+response.isSuccess());
     }
 
     @Test
