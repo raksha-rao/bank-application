@@ -28,19 +28,22 @@ public class AccountControllerTest {
     @Mock
     private AccountService accountService;
 
+    private int value = 1;
+
     @BeforeMethod(alwaysRun=true)
     public void start(){
         MockitoAnnotations.initMocks(this);
     }
 
-    @Test
+    @Test(threadPoolSize = 3, invocationCount = 2, timeOut = 1000)
     @Parameters("accountDetailsFile")
     public void createAccountTest(String accountDetailsFile) throws IOException {
         AccountRequest accountRequest = new AccountRequest();
         Mockito.when(accountService.createAccount(accountRequest,accountDetailsFile)).thenReturn(1L);
 
         BaseResponse response = accountController.createAccount(accountRequest);
-        Assert.assertNull(response.isSuccess());
+        Assert.assertNotNull(response.isSuccess());
+        Assert.assertEquals(value++,1);
     }
 
     @Test
@@ -52,7 +55,6 @@ public class AccountControllerTest {
 
         BaseResponse response = accountController.getAllAccounts();
         Assert.assertNotNull(response.isSuccess());
-        System.out.println(response.getMessage()+response.getStatus()+response.isSuccess());
     }
 
     @Test
@@ -65,6 +67,5 @@ public class AccountControllerTest {
 
         BaseResponse response = accountController.getAccount("1");
         Assert.assertNotNull(response.isSuccess());
-        System.out.println(response.getMessage()+response.getStatus()+response.isSuccess());
     }
 }
